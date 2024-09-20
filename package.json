@@ -1,0 +1,35 @@
+{
+  "name": "@hubbit86/timer",
+  "version": "0.1.0",
+  "description": "Write and manipulate time expressions",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build:types": "tsc --emitDeclarationOnly",
+    "build:js": "node build.js",
+    "build": "npm run build:types && npm run build:js",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "string",
+    "time",
+    "duration"
+  ],
+  "author": "Robert Planas Jimenez",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^29.5.5",
+    "esbuild": "0.23.1",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.1",
+    "typescript": "^5.2.2"
+  }
+}
