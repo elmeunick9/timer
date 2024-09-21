@@ -1,5 +1,14 @@
 # Timer
+[![NPM Version](https://img.shields.io/npm/v/@hubbit86/timer?color=blue)](https://www.npmjs.com/package/@hubbit86/timer)
+[![MIT License](https://img.shields.io/badge/license-MIT-blue)](https://raw.githubusercontent.com/elmeunick9/timer/refs/heads/main/LICENSE)
+
 Write and manipulate time expressions.
+
+## Install
+
+```
+npm i @hubbit86/timer
+```
 
 ## Usage
 
@@ -34,7 +43,7 @@ You can access the current stored time without modification by not passing a par
 
 ```js
 play({ start: t1("01:00"), end: t2("01:33") })  // 01:00 -> 01:33
-play({ start: t1() - t2("10s"), end: t2() })    // 00:50 -> 01:33
+play({ start: t1() - t("10s"), end: t2() })     // 00:50 -> 01:33
 ```
 
 These timers also accept a number directly, such that `t(x) = x`. This can be used to copy a timer:
