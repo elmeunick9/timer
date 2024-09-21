@@ -1,7 +1,7 @@
 import { createTimer } from '../src';
 
 describe('Format', () => {
-    const t = createTimer()
+    const t = createTimer({ unit: 's', carry: true })
 
     test('Non-strings', () => {
         expect(t()).toBe(0)
@@ -20,6 +20,7 @@ describe('Format', () => {
         expect(t('1m')).toBe(60)
         expect(t('1h')).toBe(3600)
         expect(t('1ms')).toBe(0.001)
+        expect(t('1d')).toBe(86400)
     })
 
     test('Colon', () => {
@@ -43,6 +44,9 @@ describe('Format', () => {
         expect(() => t('abcd')).toThrow()
         expect(() => t('5k')).toThrow()
         expect(() => t('5m5k')).toThrow()
+
+        // @ts-ignore
+        expect(() => t({})).toThrow()
     })
 
     test('Add/Subtract', () => {
