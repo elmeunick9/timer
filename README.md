@@ -59,36 +59,39 @@ You can combine multiple expressions in a single timer:
 t("1m3s -00:03 +5h") === t(t("1m 3s") - t("00:03") + t("5h"))
 ```
 
+## Options
+You can configure some options on your `createTimer(...)` function to change the default behavior.
+
+```ts
+export interface TimerOptions {
+    /** Specify the unit to use for returning the time. Default: `"s"` */
+    unit: TimerUnit
+
+    /** Specify a map of units to their values (from milliseconds). */
+    unitMap: Record<TimerUnit, number>
+
+    /** If enabled when using a (+/-) operator on front of the time it will add or subtract from the last calculated time. Default: `true` */
+    carry: boolean
+
+    /** If specified, marks the minimum allowed time in seconds. Default: `undefined` */
+    min?: number
+
+    /** If specified, marks the maximum allowed time in seconds. Default: `undefined` */
+    max?: number
+
+    /** What to do if the time is out of bounds. Default: `clamp` */
+    minmaxBehavior: 'error' | 'clamp' | ((seconds: number) => number)
+}
+```
+
 ## Implementation details
 
 * If you pass a malformed time, it will throw an exception, e.g: `t("6k")`.
 * If you only specify two places on the digital clock format, they will be `mm:ss`, not `hh:mm`.
 * When using the digital clock format, you can go beyond 60 or add extra leading zeros without errors, e.g: `000:120`.
 * You can get negative times, e.g: `t("0 - 12:58")`
-
+* You can copy timers configured with different units by passing the function directly, e.g `t2(t1)`.
 
 ## License
 
-```
-MIT License
-
-Copyright (c) 2024 Robert Planas Jimenez
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-```
+*MIT License - Copyright (c) 2024 Robert Planas Jimenez*
